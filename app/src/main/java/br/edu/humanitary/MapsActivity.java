@@ -17,6 +17,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     ConnectionUtils connectionUtils = new ConnectionUtils();
+    JSONObject result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
