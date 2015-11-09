@@ -13,9 +13,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AsyncResponse{
 
     private GoogleMap mMap;
+    ConnectionUtils connectionUtils = new ConnectionUtils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             JSONObject attributes = new JSONObject();
             attributes.put("fb_user_id", 1234);
-            attributes.put("latitude", -19.9125787);
-            attributes.put("longitude", -43.937743);
+            attributes.put("latitude", 0);
+            attributes.put("longitude", 0);
             attributes.put("fb_access_token", 1234556);
 
 
@@ -40,12 +41,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
-
+        connectionUtils.delegate = this;
         String url = "http://humanitary.cloudapp.net/humanitary_api/near_groups";
-        new ConnectionUtils().execute(url, nearby);
+//        String url = "http://516fcb86.ngrok.io/humanitary_api/near_groups";
+        connectionUtils.execute(url, nearby);
 
     }
 
+    @Override
+    public void processFinish(String output) {
+        //O output é o resultado retornado da API. Tratar aqui.
+        System.out.print(output);
+    }
 
     /**
      * Manipulates the map once available.
