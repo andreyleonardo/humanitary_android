@@ -14,9 +14,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Andrey on 04/11/15.
- */
+
 public class ConnectionUtils extends AsyncTask<Object, Void, String> {
     public AsyncResponse delegate = null;
 
